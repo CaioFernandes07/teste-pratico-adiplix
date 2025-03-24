@@ -114,10 +114,10 @@ Gere a key do projeto Laravel
 php artisan key:generate
 ```
 
-Rode as migrations
+Rode as migrations e seeders
 
 ```sh
-php artisan migrate
+php artisan migrate --seed
 ```
 
 Url base

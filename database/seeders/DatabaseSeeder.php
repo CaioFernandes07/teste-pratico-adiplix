@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Person;
+use App\Models\Task;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $people = Person::factory(50)->create();
+        $task   = Task::factory(50)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $people->each(function (Person $person) use ($task){
+            $ramdomTasks = $task->random(rand(1, 5));
+            $person->tasks()->attach($ramdomTasks);
+        });
     }
 }

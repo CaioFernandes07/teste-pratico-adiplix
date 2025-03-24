@@ -1,66 +1,124 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projeto - Teste Prático Adiplix
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição do Projeto
 
-## About Laravel
+Este projeto consiste em um sistema de **Cadastro de Pessoas e Tarefas**, desenvolvido utilizando o framework **Laravel** em PHP. O sistema permite gerenciar informações de pessoas e tarefas, estabelecendo um **relacionamento muitos-para-muitos** entre elas, onde cada pessoa pode estar associada a várias tarefas e cada tarefa pode ser atribuída a múltiplas pessoas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O objetivo principal deste projeto é demonstrar conhecimento em diversos aspectos do desenvolvimento com Laravel, incluindo a criação de modelos, migrations para a estrutura do banco de dados, factories e seeders para popular os dados, o uso do Eloquent ORM para interação com o banco de dados, Requests para validação de dados e a implementação de um **CRUD completo** para as entidades de Pessoas e Tarefas. Além disso, o sistema oferece funcionalidades para **atribuir e remover tarefas de pessoas**, bem como listar as tarefas de uma pessoa e as pessoas atribuídas a uma tarefa.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Este sistema pode ser testado utilizando ferramentas como **Postman** ou **Insomnia**.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Funcionalidades
 
-## Learning Laravel
+O sistema implementa as seguintes funcionalidades:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+*   **CRUD para Pessoas:**
+    *   **Criar:** Permite cadastrar novas pessoas no sistema, exigindo um **nome (obrigatório)** e um **e-mail (obrigatório e único)**. A rota correspondente é `POST /people`. O corpo da requisição espera um JSON com as chaves `"name"` e `"email"` (exemplo: `{"name": "João da Silva", "email": "joao.silva@example.com"}`) .
+    *   **Listar:** Permite visualizar todas as pessoas cadastradas no sistema. A rota correspondente é `GET /people`.
+    *   **Visualizar:** Permite visualizar os detalhes de uma pessoa específica, identificada pelo seu ID. A rota correspondente é `GET /people/{person}`.
+    *   **Editar:** Permite atualizar as informações de uma pessoa existente, identificada pelo seu ID. A rota correspondente é `PUT/PATCH /people/{person}`. Espera um JSON com os campos a serem atualizados (`"name"` e/ou `"email"`) [nosso histórico de conversas,.
+    *   **Excluir:** Permite remover uma pessoa do sistema, identificada pelo seu ID. A rota correspondente é `DELETE /people/{person}`.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+*   **CRUD para Tarefas:**
+    *   **Criar:** Permite cadastrar novas tarefas no sistema, exigindo um **título (obrigatório)**. A rota correspondente é `POST /tasks`. O corpo da requisição espera um JSON com a chave `"title"` e opcionalmente `"description"` (texto) e `"status"` (booleano, padrão: `false`). Exemplo: `{"title": "Nova Tarefa", "description": "Detalhes da tarefa.", "status": false}`.
+    *   **Listar:** Permite visualizar todas as tarefas cadastradas no sistema. A rota correspondente é `GET /tasks`.
+    *   **Visualizar:** Permite visualizar os detalhes de uma tarefa específica, identificada pelo seu ID. A rota correspondente é `GET /tasks/{task}`.
+    *   **Editar:** Permite atualizar as informações de uma tarefa existente, identificada pelo seu ID. A rota correspondente é `PUT/PATCH /tasks/{task}`. Espera um JSON com os campos a serem atualizados (`"title"`, `"description"` e/ou `"status"`).
+    *   **Excluir:** Permite remover uma tarefa do sistema, identificada pelo seu ID. A rota correspondente é `DELETE /tasks/{task}`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+*   **Relacionamento Pessoas ↔ Tarefas:**
+    *   **Atribuir Tarefas a uma Pessoa:** Permite associar uma ou mais tarefas a uma pessoa específica, identificada pelo seu ID. A rota correspondente é `POST /people/{person}/tasks`. Espera um JSON com um array de IDs de tarefas existentes na chave `"tasks"` (exemplo: `{"tasks": [5, 9, 12]}`).
+    *   **Remover Tarefas de uma Pessoa:** Permite desassociar uma ou mais tarefas de uma pessoa específica, identificada pelo seu ID. A rota correspondente é `DELETE /people/{person}/tasks`. Espera um JSON com um array de IDs de tarefas a serem removidas na chave `"tasks"` (exemplo: `{"tasks": [5, 12]}`).
+    *   **Listar Tarefas de uma Pessoa:** Permite visualizar todas as tarefas associadas a uma pessoa específica, identificada pelo seu ID. A rota correspondente é `GET /people/{person}/tasks`.
+    *   **Listar Pessoas Atribuídas a uma Tarefa:** Permite visualizar todas as pessoas associadas a uma tarefa específica, identificada pelo seu ID. A rota correspondente é `GET /tasks/{task}/people`.
 
-## Laravel Sponsors
+*   **Factories e Seeders:** O projeto inclui factories para a geração de dados fictícios de pessoas e tarefas, e seeders para popular o banco de dados com **10 pessoas e 30 tarefas**, distribuindo as tarefas aleatoriamente entre as pessoas.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Tecnologias Utilizadas
 
-### Premium Partners
+*   **PHP:** Linguagem de programação utilizada no backend.
+*   **Laravel:** Framework PHP utilizado para o desenvolvimento da aplicação.
+*   **Eloquent ORM:** Utilizado para facilitar a interação com o banco de dados. Os modelos `Person` e `Task` definem o relacionamento **BelongsToMany** entre as tabelas `people` e `tasks`.
+*   **Migrations:** Utilizadas para definir e gerenciar a estrutura do banco de dados (criação das tabelas `people`, `tasks` e a tabela pivô para o relacionamento muitos-para-muitos).
+*   **Factories:** Utilizadas para gerar dados de teste para as entidades `Person` e `Task`.
+*   **Seeders:** Utilizados para popular o banco de dados com dados iniciais, como as 10 pessoas e 30 tarefas.
+*   **Requests:** Utilizadas para **validação dos dados** das requisições, garantindo que os dados recebidos estejam no formato esperado. São utilizadas as classes `PersonRequest` e `TaskRequest` para definir as regras de validação para as operações de criação e atualização de pessoas e tarefas, respectivamente.
+*   **JSON:** Formato utilizado para a troca de dados entre a aplicação (API) e o cliente (ex: Postman, Insomnia). As respostas da API são retornadas no formato JSON.
+*   **Composer:** Gerenciador de dependências para PHP e Laravel.
+*   **Banco de Dados Relacional:** MySQL.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Requisitos
+- PHP 8.2 ou superior
+- Docker
+- Composer
+- MySQL
+- Laravel
 
-## Contributing
+## Instalação
+Siga os passos abaixo para instalar e configurar a aplicação:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Passo a passo
 
-## Code of Conduct
+Clone Repositório
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```sh
+git clone https://github.com/CaioFernandes07/teste-pratico-adiplix.git
+```
 
-## Security Vulnerabilities
+```sh
+cd teste-pratico-adiplix
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Crie o Arquivo .env
 
-## License
+```sh
+cp .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Atualize as variáveis de ambiente do arquivo .env
+
+```dosini
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=(Ip da sua máquina)
+DB_PORT=3380
+DB_DATABASE=db_app
+DB_USERNAME=adiplix
+DB_PASSWORD=adiplix
+```
+
+Inicie a aplicação
+
+```sh
+docker-compose up
+```
+Entre no container da aplicação
+
+```sh
+docker exec -it php_app bash
+```
+
+Instale as dependências do projeto
+
+```sh
+composer install
+```
+```sh
+npm install
+```
+
+Gere a key do projeto Laravel
+
+```sh
+php artisan key:generate
+```
+
+Rode as migrations
+
+```sh
+php artisan migrate
+```
+
+Url base
+(http://localhost:8080)

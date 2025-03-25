@@ -88,6 +88,12 @@ DB_USERNAME=adiplix
 DB_PASSWORD=adiplix
 ```
 
+Adicionar permissões
+
+```sh
+sudo chown -R www-data:www-data storage bootstrap
+```
+
 Inicie a aplicação
 
 ```sh

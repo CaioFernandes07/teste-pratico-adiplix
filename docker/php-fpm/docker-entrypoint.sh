@@ -27,5 +27,8 @@ php artisan key:generate
 # Executando migrations e seeders
 php artisan migrate --seed
 
+#Adicionar permissões para o diretório storage
+chown -R www-data:www-data storage bootstrap
+
 # Executar o comando fornecido (normalmente php-fpm)
 exec "$@"

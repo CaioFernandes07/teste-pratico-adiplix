@@ -93,32 +93,6 @@ Inicie a aplicação
 ```sh
 docker-compose up
 ```
-Entre no container da aplicação
-
-```sh
-docker exec -it php_app bash
-```
-
-Instale as dependências do projeto
-
-```sh
-composer install
-```
-```sh
-npm install
-```
-
-Gere a key do projeto Laravel
-
-```sh
-php artisan key:generate
-```
-
-Rode as migrations e seeders
-
-```sh
-php artisan migrate --seed
-```
 
 Url base
 (http://localhost:8080)

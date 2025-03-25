@@ -41,7 +41,7 @@ O sistema implementa as seguintes funcionalidades:
 *   **Eloquent ORM:** Utilizado para facilitar a interação com o banco de dados. Os modelos `Person` e `Task` definem o relacionamento **BelongsToMany** entre as tabelas `people` e `tasks`.
 *   **Migrations:** Utilizadas para definir e gerenciar a estrutura do banco de dados (criação das tabelas `people`, `tasks` e a tabela pivô para o relacionamento muitos-para-muitos).
 *   **Factories:** Utilizadas para gerar dados de teste para as entidades `Person` e `Task`.
-*   **Seeders:** Utilizados para popular o banco de dados com dados iniciais, como as 10 pessoas e 30 tarefas.
+*   **Seeders:** Utilizados para popular o banco de dados com dados iniciais.
 *   **Requests:** Utilizadas para **validação dos dados** das requisições, garantindo que os dados recebidos estejam no formato esperado. São utilizadas as classes `PersonRequest` e `TaskRequest` para definir as regras de validação para as operações de criação e atualização de pessoas e tarefas, respectivamente.
 *   **JSON:** Formato utilizado para a troca de dados entre a aplicação (API) e o cliente (ex: Postman, Insomnia). As respostas da API são retornadas no formato JSON.
 *   **Composer:** Gerenciador de dependências para PHP e Laravel.

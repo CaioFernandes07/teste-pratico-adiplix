@@ -27,5 +27,11 @@ php artisan key:generate
 # Executando migrations e seeders
 php artisan migrate --seed
 
+# Adicionar permissões de escrita para o diretório de storage
+sudo chown -R $USER:www-data storage
+sudo chown -R $USER:www-data bootstrap/cache
+sudo chmod -R 775 storage
+sudo chmod -R 775 bootstrap/cache
+
 # Executar o comando fornecido (normalmente php-fpm)
 exec "$@"

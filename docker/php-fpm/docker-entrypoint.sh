@@ -21,6 +21,11 @@ if [ -f "package.json" ]; then
         npm run build
     fi
 fi
+# Gerar a chave da aplicação
+php artisan key:generate
+
+# Executando migrations e seeders
+php artisan migrate --seed
 
 # Executar o comando fornecido (normalmente php-fpm)
 exec "$@"
